@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// warning due to this
+// warning due to
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
