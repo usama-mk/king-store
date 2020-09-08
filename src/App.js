@@ -9,6 +9,9 @@ import ShopPage from './pages/shop/shop.components';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { selectCurrentUser } from './redux/user/user.selector';
+import {createStructuredSelector} from 'reselect';
+import CheckoutPage from './pages/checkout/checkout.component';
 
 const HatsPage = () => {
   return (<div>
@@ -66,6 +69,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
+          <Route exact path='/checkout' component={CheckoutPage} />
           <Route path='/signin' render={() =>
            this.props.currentUser ?
             (
@@ -76,6 +80,7 @@ class App extends React.Component {
             )
           }
            />
+           
 
         </Switch>
       </div>
@@ -83,8 +88,8 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 //where you want to set the new state

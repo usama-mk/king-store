@@ -4,8 +4,12 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import './header.styles.scss';
 import { auth } from '../../firebase/firebase.utils';
 import {connect} from 'react-redux';
+import {createStructuredSelector} from 'reselect';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import {selectCartHidden} from '../../redux/cart/cart.selectors';
+import {selectCurrentUser} from '../../redux/user/user.selector';
+
 
 const Header=({currentUser, hidden})=>(
     <div className='header'>
@@ -37,11 +41,12 @@ const Header=({currentUser, hidden})=>(
     </div>
 );
 //state(which  now is further destructred to user and cart..) is the rootReducer(obj)
-const mapStateToProps= ({user: {currentUser}, cart: {hidden}}) =>(
+//createStructuredSelector passes state obj to all the selectors in ftn
+const mapStateToProps= createStructuredSelector(
     {
         //name of the property you pass in previously as props to this component : value
-        currentUser: currentUser,
-        hidden: hidden
+        currentUser: selectCurrentUser,
+        hidden: selectCartHidden
     }
 )
 
